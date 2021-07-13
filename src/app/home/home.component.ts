@@ -4,6 +4,7 @@ import {RouteDTO} from '../dto/RouteDTO';
 import {StationDTO} from '../dto/StationDTO';
 import {MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {VehicleDTO} from '../dto/VehicleDTO';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,10 @@ import {VehicleDTO} from '../dto/VehicleDTO';
 export class HomeComponent implements OnInit {
 
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+
+  paramsConfigurationView: Subject<any> = new Subject();
+  manualDisplacementView: Subject<any> = new Subject();
+  removeVehicleView: Subject<any> = new Subject();
 
   infoVehicle: VehicleDTO;
 
@@ -44,6 +49,11 @@ export class HomeComponent implements OnInit {
         console.log(error);
       });
 
+    this.refreshVehicles();
+  }
+
+  refreshVehicles() {
+    this.vehiclesMarkers = [];
     this.apiService.vehicles().subscribe(vehicles => {
         this.drawVehicles(vehicles);
       },
@@ -95,15 +105,15 @@ export class HomeComponent implements OnInit {
     this.infoWindow.open(marker);
   }
 
-  openManualDisplacementView(infoVehicle: VehicleDTO) {
-
+  openManualDisplacementView() {
+    this.manualDisplacementView.next('open');
   }
 
-  openChangeConfigParamsView(infoVehicle: VehicleDTO) {
-
+  openParamsConfigurationView() {
+    this.paramsConfigurationView.next('open');
   }
 
-  openRemoveVehicleView(infoVehicle: VehicleDTO) {
-
+  openRemoveVehicleView() {
+    this.removeVehicleView.next('open');
   }
 }

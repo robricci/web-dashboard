@@ -1,0 +1,30 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">Params Configuration</h5>
+    <p class="text-center">Vehicle {{vehicle.licensePlate}}</p>
+
+    <form class="configuration-form">
+      <div class="form-group">
+        <input #occupancyTarget type="number" (change)="enableSaveButton()" class="form-control" id="occupancyTarget" required autocomplete="off" value="{{vehicle.occupancyTarget}}">
+        <label class="form-control-placeholder" for="occupancyTarget">Occupancy target (# seats)</label>
+      </div>
+      <div class="form-group">
+        <input #inertialTimeTarget type="number" (change)="enableSaveButton()" class="form-control" id="inertialTimeTarget" required autocomplete="off" value="{{vehicle.inertialTimeTarget}}">
+        <label class="form-control-placeholder" for="inertialTimeTarget">Inertial time target (minutes)</label>
+      </div>
+      <div class="form-group">
+        <input #waitingTimeTarget type="number" (change)="enableSaveButton()" class="form-control" id="waitingTimeTarget" required autocomplete="off" value="{{vehicle.waitingTimeTarget}}">
+        <label class="form-control-placeholder" for="waitingTimeTarget">Waiting time target (minutes)</label>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <button type="button" class="btn-conf cancel" (click)="close()">CANCEL</button>
+        </div>
+        <div class="col-sm-6">
+          <button type="button" [disabled]="saveButtonDisabled"
+                  (click)="save(vehicle.licensePlate, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value)" class="btn-conf">SAVE</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

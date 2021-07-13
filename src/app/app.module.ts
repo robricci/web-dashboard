@@ -9,12 +9,14 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import {AuthInterceptor} from './auth.interceptor';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,

@@ -37,12 +37,17 @@
       Inertial time target: {{ infoVehicle.inertialTimeTarget }} minutes<br>
       Waiting time target: {{ infoVehicle.waitingTimeTarget }} minutes
       <div class="actions">
-        <button class="btn" (click)="openManualDisplacementView(infoVehicle)" title="Manual displacement"><i class="fa fa-arrows-alt"></i></button>
-        <button class="btn" (click)="openChangeConfigParamsView(infoVehicle)" title="Params configuration"><i class="fa fa-cogs"></i></button>
-        <button class="btn" (click)="openRemoveVehicleView(infoVehicle)" title="Remove vehicle"><i class="fa fa-trash"></i></button>
+        <button class="btn" (click)="openManualDisplacementView()" title="Manual displacement"><i class="fa fa-arrows-alt"></i></button>
+        <button class="btn" (click)="openParamsConfigurationView()" title="Params configuration"><i class="fa fa-cogs"></i></button>
+        <button class="btn" (click)="openRemoveVehicleView()" title="Remove vehicle"><i class="fa fa-trash"></i></button>
       </div>
     </div>
   </map-info-window>
 </google-map>
 
 <app-login (loggedIn)="onLoggedIn($event)"></app-login>
+
+<app-configuration
+  [openView]="paramsConfigurationView"
+  [vehicle]="infoVehicle"
+  (saved)="refreshVehicles()"></app-configuration>

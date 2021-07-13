@@ -15,12 +15,13 @@ export class ApiService {
   private static LOGIN_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/users/login';
   private static GET_ROUTES_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/routes';
   private static GET_VEHICLES_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles';
+  private static VEHICLE_PARAMS_CONFIGURATION_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles/{}/configuration';
 
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<LoginResponse> {
-    const loginObj = { username, password};
-    return this.http.post<LoginResponse>(ApiService.LOGIN_API_ENDPOINT, loginObj);
+    const body = { username, password};
+    return this.http.post<LoginResponse>(ApiService.LOGIN_API_ENDPOINT, body);
   }
 
   routes(): Observable<Array<RouteDTO>> {
@@ -29,5 +30,12 @@ export class ApiService {
 
   vehicles(): Observable<Array<VehicleDTO>> {
     return this.http.get<Array<VehicleDTO>>(ApiService.GET_VEHICLES_API_ENDPOINT);
+  }
+
+  saveParamsConfiguration(licensePlate: string, occupancyTarget: number,
+                          inertialTimeTarget: number, waitingTimeTarget: number): Observable<any> {
+    const endpoint = ApiService.VEHICLE_PARAMS_CONFIGURATION_API_ENDPOINT.replace('{}', licensePlate);
+    const body = {occupancyTarget, inertialTimeTarget, waitingTimeTarget};
+    return this.http.post<any>(endpoint, body);
   }
 }
