@@ -13,8 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    const jwt = JSON.parse(localStorage.getItem('loggedInUser'));
+    const jwt = localStorage.getItem('loggedInUser');
     if (jwt) {
       request = request.clone({
         setHeaders: {

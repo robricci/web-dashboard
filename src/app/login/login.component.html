@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">City Application</h5>
+    <p class="text-center">Manager console</p>
+    <button type="button" class="close" data-dismiss="modal">
+      <span><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+    </button>
+
+    <form class="seminor-login-form">
+      <div class="form-group">
+        <input #username type="text" class="form-control" id="username" required autocomplete="off">
+        <label class="form-control-placeholder" for="username">Username</label>
+      </div>
+      <div class="form-group">
+        <input #password type="password" class="form-control" id="password" required autocomplete="off">
+        <label class="form-control-placeholder" for="password">Password</label>
+      </div>
+      <div class="form-group">
+        <label class="container-checkbox">
+          Remember Me On This Computer
+          <input type="checkbox" checked="checked" required>
+          <span class="checkmark-box"></span>
+        </label>
+      </div>
+
+      <div class="btn-check-log">
+        <button type="button" class="btn-check-login" (click)="login(username.value, password.value)">LOGIN</button>
+      </div>
+
+
+      <div class="forgot-pass-fau text-center pt-3">
+        <a href="#" class="text-secondary">Forgot Your Password?</a>
+      </div>
+    </form>
+  </div>
+</ng-template>
