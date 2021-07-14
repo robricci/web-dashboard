@@ -5,6 +5,15 @@
       width: 200px;
     }
   }
+  .error {
+    margin-bottom: 10px;
+    color: #bc1717;
+    visibility: hidden;
+    min-height: 24px;
+  }
+  .show {
+    visibility: visible;
+  }
 }
 
 .seminor-login-modal-body .close{
@@ -29,9 +38,12 @@
 }
 
 /* form animation */
-.seminor-login-form .form-group {
+.seminor-login-form .form-group:not(:last-child) {
   position: relative;
-  margin-bottom: 1.5em !important;
+  margin-bottom: 20px;
+}
+.seminor-login-form .form-group.last {
+  margin-bottom: 10px;
 }
 .seminor-login-form .form-control{
   border: 0px solid #ced4da !important;

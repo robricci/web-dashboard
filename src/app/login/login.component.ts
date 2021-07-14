@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('content') modal: ElementRef;
   private modalReference: NgbModalRef;
 
+  errors: string;
+
   constructor(private modalService: NgbModal,
               private apiService: ApiService) {}
 
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     const jwt: string = localStorage.getItem('loggedInUser');
     if (jwt) {
       this.apiService.validateSession(jwt).subscribe((response: SessionResponse) => {
-        if (response.authenticated) {
+        if (response.jwt) {
           this.loggedIn.emit(jwt);
         } else {
           this.openModal();
@@ -52,14 +54,26 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   login(username: string, password: string, event: Event) {
     event.preventDefault();
-    this.apiService.login(username, password)
-      .subscribe(response => {
-          localStorage.setItem('loggedInUser', response.jwt);
-          this.modalReference.close();
-          this.loggedIn.emit(response.jwt);
-        },
-        error => {
-          console.log(error);
-        });
+    if (username !== '' && password !== '') {
+      this.apiService.login(username, password)
+        .subscribe(response => {
+            if (response.jwt && response.roles && response.roles.includes('ROLE_MANAGER')) {
+              localStorage.setItem('loggedInUser', response.jwt);
+              this.modalReference.close();
+              this.loggedIn.emit(response.jwt);
+            } else {
+              this.errors = 'Access denied: manager role required';
+            }
+          },
+          response => {
+            if (response.status === 400) {
+              this.errors = 'Please enter username and password';
+            } else if (response.status === 401) {
+              this.errors = 'Invalid credentials';
+            } else {
+              this.errors = 'Generic error';
+            }
+          });
+    }
   }
 }

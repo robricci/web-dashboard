@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {LoginResponse} from '../dto/LoginResponse';
-import {map} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {RouteDTO} from '../dto/RouteDTO';
 import {VehicleDTO} from '../dto/VehicleDTO';
 import {SessionResponse} from '../dto/SessionResponse';
@@ -24,9 +22,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string): Observable<LoginResponse> {
+  login(username: string, password: string): Observable<SessionResponse> {
     const body = { username, password};
-    return this.http.post<LoginResponse>(ApiService.LOGIN_API_ENDPOINT, body);
+    return this.http.post<SessionResponse>(ApiService.LOGIN_API_ENDPOINT, body);
   }
 
   validateSession(jwt: string): Observable<SessionResponse> {

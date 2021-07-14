@@ -43,22 +43,24 @@ export class InsertVehicleComponent implements OnInit {
   save(licensePlate: string, totalSeats: number, occupancyTarget: number,
        inertialTimeTarget: number, waitingTimeTarget: number, event: Event) {
     event.preventDefault();
-    const vehicles = [
-      {
-        licensePlate,
-        totalAvailableSeats: totalSeats,
-        waitingTimeTarget,
-        occupancyTarget,
-        inertialTimeTarget
-      }
-    ];
-    this.apiService.insertVehicles(vehicles)
-      .subscribe(res => {
-          this.saved.emit();
-          this.close();
-        },
-        error => {
-          console.log(error);
-        });
+    if (licensePlate && totalSeats && occupancyTarget && inertialTimeTarget && waitingTimeTarget) {
+      const vehicles = [
+        {
+          licensePlate,
+          totalAvailableSeats: totalSeats,
+          waitingTimeTarget,
+          occupancyTarget,
+          inertialTimeTarget
+        }
+      ];
+      this.apiService.insertVehicles(vehicles)
+        .subscribe(res => {
+            this.saved.emit();
+            this.close();
+          },
+          error => {
+            console.log(error);
+          });
+    }
   }
 }

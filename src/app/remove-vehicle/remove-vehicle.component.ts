@@ -18,12 +18,17 @@ export class RemoveVehicleComponent implements OnInit {
   @ViewChild('content') modal: ElementRef;
   private modalReference: NgbModalRef;
 
+  enableSaveButton: boolean = true;
+  msg: string;
+
   constructor(private modalService: NgbModal,
               private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.openView.subscribe(event => {
       this.open(this.modal);
+      this.msg = undefined;
+      this.enableSaveButton = true;
     });
   }
 
@@ -45,11 +50,22 @@ export class RemoveVehicleComponent implements OnInit {
     event.preventDefault();
     this.apiService.removeVehicle(licensePlate)
       .subscribe(res => {
-          this.saved.emit();
-          this.close();
+          if (res) {
+            this.saved.emit();
+            this.close();
+          } else {
+            this.enableSaveButton = false;
+            this.msg = 'The vehicle is currently in motion, please try again when the vehicle is stationary.';
+          }
         },
-        error => {
-          console.log(error);
+        response => {
+          if (response.status === 400) {
+            this.msg = 'Please try again later';
+          } else if (response.status === 401) {
+            this.msg = 'Invalid credentials';
+          } else {
+            this.msg = 'Generic error';
+          }
         });
   }
 }

@@ -66,13 +66,15 @@ export class ConfigurationComponent implements OnInit {
 
   save(licensePlate: string, occupancyTarget: number, inertialTimeTarget: number, waitingTimeTarget: number, event: Event) {
     event.preventDefault();
-    this.apiService.saveParamsConfiguration(licensePlate, occupancyTarget, inertialTimeTarget, waitingTimeTarget)
-      .subscribe(res => {
-          this.saved.emit();
-          this.close();
-        },
-        error => {
-          console.log(error);
-        });
+    if (licensePlate && occupancyTarget && inertialTimeTarget && waitingTimeTarget) {
+      this.apiService.saveParamsConfiguration(licensePlate, occupancyTarget, inertialTimeTarget, waitingTimeTarget)
+        .subscribe(res => {
+            this.saved.emit();
+            this.close();
+          },
+          error => {
+            console.log(error);
+          });
+    }
   }
 }

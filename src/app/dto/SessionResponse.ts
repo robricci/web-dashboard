@@ -1,4 +1,4 @@
 export class SessionResponse {
-  authenticated: boolean;
+  jwt: string;
   roles: Array<string>;
 }

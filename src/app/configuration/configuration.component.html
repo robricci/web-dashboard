@@ -5,16 +5,16 @@
 
     <form class="configuration-form">
       <div class="form-group">
-        <input #occupancyTarget type="number" (change)="enableSaveButton()" class="form-control" id="occupancyTarget" required autocomplete="off" value="{{vehicle.occupancyTarget}}">
-        <label class="form-control-placeholder" for="occupancyTarget">Occupancy target (# seats)</label>
+        <input #occupancyTarget min="1" type="number" (change)="enableSaveButton()" class="form-control" id="occupancyTarget" required autocomplete="off" value="{{vehicle.occupancyTarget}}">
+        <label class="form-control-placeholder" for="occupancyTarget">Occupancy target (# seats)<span class="required">*</span></label>
       </div>
       <div class="form-group">
-        <input #inertialTimeTarget type="number" (change)="enableSaveButton()" class="form-control" id="inertialTimeTarget" required autocomplete="off" value="{{vehicle.inertialTimeTarget}}">
-        <label class="form-control-placeholder" for="inertialTimeTarget">Inertial time target (minutes)</label>
+        <input #inertialTimeTarget min="1" type="number" (change)="enableSaveButton()" class="form-control" id="inertialTimeTarget" required autocomplete="off" value="{{vehicle.inertialTimeTarget}}">
+        <label class="form-control-placeholder" for="inertialTimeTarget">Inertial time target (minutes)<span class="required">*</span></label>
       </div>
       <div class="form-group">
-        <input #waitingTimeTarget type="number" (change)="enableSaveButton()" class="form-control" id="waitingTimeTarget" required autocomplete="off" value="{{vehicle.waitingTimeTarget}}">
-        <label class="form-control-placeholder" for="waitingTimeTarget">Waiting time target (minutes)</label>
+        <input #waitingTimeTarget min="1" type="number" (change)="enableSaveButton()" class="form-control" id="waitingTimeTarget" required autocomplete="off" value="{{vehicle.waitingTimeTarget}}">
+        <label class="form-control-placeholder" for="waitingTimeTarget">Waiting time target (minutes)<span class="required">*</span></label>
       </div>
       <div class="row">
         <div class="col-sm-6">
@@ -23,6 +23,9 @@
         <div class="col-sm-6">
           <button type="submit" [disabled]="saveButtonDisabled"
                   (click)="save(vehicle.licensePlate, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value, $event)" class="btn-conf">SAVE</button>
+        </div>
+        <div class="col-md-6 col-sm-12 required-box required">
+          *Required field
         </div>
       </div>
     </form>
