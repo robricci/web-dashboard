@@ -10,13 +10,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import {AuthInterceptor} from './auth.interceptor';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { RemoveVehicleComponent } from './remove-vehicle/remove-vehicle.component';
+import { InsertVehicleComponent } from './insert-vehicle/insert-vehicle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    RemoveVehicleComponent,
+    InsertVehicleComponent
   ],
   imports: [
     BrowserModule,

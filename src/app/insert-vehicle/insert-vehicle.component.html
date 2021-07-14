@@ -1,0 +1,41 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">Insert Vehicle</h5>
+
+    <form class="insert-vehicle-form">
+      <div class="form-group">
+        <input #licensePlate type="text" class="form-control" id="licensePlate" required autocomplete="off">
+        <label class="form-control-placeholder" for="licensePlate">License Plate</label>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <input #totalSeats type="number" class="form-control" id="totalSeats" required autocomplete="off">
+          <label class="form-control-placeholder" for="totalSeats">Total seats</label>
+        </div>
+        <div class="col-sm-6">
+          <input #occupancyTarget type="number" class="form-control" id="occupancyTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="occupancyTarget">Occupancy target (# seats)</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <input #inertialTimeTarget type="number" class="form-control" id="inertialTimeTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="inertialTimeTarget">Inertial time target (minutes)</label>
+        </div>
+        <div class="col-sm-6">
+          <input #waitingTimeTarget type="number" class="form-control" id="waitingTimeTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="waitingTimeTarget">Waiting time target (minutes)</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <button type="button" class="btn-conf cancel" (click)="close()">CANCEL</button>
+        </div>
+        <div class="col-sm-6">
+          <button type="button"
+                  (click)="save(licensePlate.value, totalSeats.value, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value)" class="btn-conf">SAVE</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

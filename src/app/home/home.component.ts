@@ -15,9 +15,24 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
+  mapOptions = {
+    zoom: 11,
+    center: {
+      lat: 45.757430,
+      lng: 4.840735
+    },
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    fullscreenControl: true
+  };
+
   paramsConfigurationView: Subject<any> = new Subject();
   manualDisplacementView: Subject<any> = new Subject();
   removeVehicleView: Subject<any> = new Subject();
+  insertVehicleView: Subject<any> = new Subject();
 
   infoVehicle: VehicleDTO;
 
@@ -85,10 +100,12 @@ export class HomeComponent implements OnInit {
 
   drawVehicles(vehicles: Array<VehicleDTO>): void {
     vehicles.forEach((vehicle: VehicleDTO) => {
+      const randomLat = parseFloat(((Math.random() * 2 - 1) * 0.001).toFixed(5));
+      const randomLng = parseFloat(((Math.random() * 2 - 1) * 0.001).toFixed(5));
       this.vehiclesMarkers.push({
         position: {
-          lat: vehicle.currentStation.position.latitude + 0.0005,
-          lng: vehicle.currentStation.position.longitude + 0.0005,
+          lat: vehicle.currentStation.position.latitude + randomLat,
+          lng: vehicle.currentStation.position.longitude + randomLng,
         },
         title: `Vehicle ${vehicle.licensePlate}`,
         options: {
@@ -115,5 +132,9 @@ export class HomeComponent implements OnInit {
 
   openRemoveVehicleView() {
     this.removeVehicleView.next('open');
+  }
+
+  openInsertVehicleView() {
+    this.insertVehicleView.next('open');
   }
 }

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {NgbModal, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from '../services/api.service';
+import {SessionResponse} from '../dto/SessionResponse';
 
 @Component({
   selector: 'app-login',
@@ -22,21 +23,31 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const jwt: string = localStorage.getItem('loggedInUser');
-    if (localStorage.getItem('loggedInUser')) {
-      this.loggedIn.emit(jwt);
+    if (jwt) {
+      this.apiService.validateSession(jwt).subscribe((response: SessionResponse) => {
+        if (response.authenticated) {
+          this.loggedIn.emit(jwt);
+        } else {
+          this.openModal();
+        }
+        },
+        error => {
+          this.openModal();
+        });
     } else {
-      this.open(this.modal);
+      this.openModal();
     }
   }
 
-  open(content) {
+  private openModal() {
+    localStorage.clear();
     const ngbModalOptions: NgbModalOptions = {
       backdrop : 'static',
       keyboard : false,
       size: 'sm',
       ariaLabelledBy: 'modal-basic-title'
     };
-    this.modalReference = this.modalService.open(content, ngbModalOptions);
+    this.modalReference = this.modalService.open(this.modal, ngbModalOptions);
   }
 
   login(username: string, password: string) {

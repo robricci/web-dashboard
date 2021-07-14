@@ -1,0 +1,17 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">Remove Vehicle</h5>
+
+    <p>Are you sure you want to remove the vehicle with license plate  <b>{{vehicle.licensePlate}}</b>?</p>
+    <form class="remove-vehicle-form">
+      <div class="row">
+        <div class="col-sm-6">
+          <button type="button" class="btn-conf cancel" (click)="close()">NO</button>
+        </div>
+        <div class="col-sm-6">
+          <button type="button" (click)="save(vehicle.licensePlate)" class="btn-conf">YES</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

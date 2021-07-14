@@ -1,6 +1,5 @@
 <google-map
-  [center]="center"
-  [zoom]="11"
+  [options]="mapOptions"
   height="100vh"
   width="100%">
 
@@ -51,3 +50,22 @@
   [openView]="paramsConfigurationView"
   [vehicle]="infoVehicle"
   (saved)="refreshVehicles()"></app-configuration>
+
+<app-remove-vehicle
+  [openView]="removeVehicleView"
+  [vehicle]="infoVehicle"
+  (saved)="refreshVehicles()"></app-remove-vehicle>
+
+<app-insert-vehicle
+  [openView]="insertVehicleView"
+  (saved)="refreshVehicles()"></app-insert-vehicle>
+
+<div class="add-vehicle">
+  <a href="#" class="float" (click)="openInsertVehicleView()">
+    <i class="fa fa-plus add"></i>
+  </a>
+  <div class="label-container">
+    <div class="label-text">Insert Vehicle</div>
+    <i class="fa fa-play label-arrow"></i>
+  </div>
+</div>
