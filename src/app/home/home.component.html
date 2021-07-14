@@ -60,16 +60,16 @@
   [openView]="insertVehicleView"
   (saved)="refreshVehicles()"></app-insert-vehicle>
 
-<div class="add-vehicle">
+<div class="add-vehicle" *ngIf="showPrivateActions">
   <a href="#" class="float" (click)="openInsertVehicleView()">
     <i class="fa fa-plus add"></i>
   </a>
   <div class="label-container">
+    <i class="fa fa-play fa-rotate-180 label-arrow"></i>
     <div class="label-text">Insert Vehicle</div>
-    <i class="fa fa-play label-arrow"></i>
   </div>
 </div>
 
-<div class="logout-box" *ngIf="showLogoutButton">
+<div class="logout-box" *ngIf="showPrivateActions">
   <button type="button" class="btn-conf cancel" (click)="logout()">Logout</button>
 </div>

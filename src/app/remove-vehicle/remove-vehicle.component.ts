@@ -41,7 +41,8 @@ export class RemoveVehicleComponent implements OnInit {
     this.modalReference.close();
   }
 
-  save(licensePlate: string) {
+  save(licensePlate: string, event: Event) {
+    event.preventDefault();
     this.apiService.removeVehicle(licensePlate)
       .subscribe(res => {
           this.saved.emit();

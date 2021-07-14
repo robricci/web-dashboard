@@ -9,7 +9,7 @@
           <button type="button" class="btn-conf cancel" (click)="close()">NO</button>
         </div>
         <div class="col-sm-6">
-          <button type="button" (click)="save(vehicle.licensePlate)" class="btn-conf">YES</button>
+          <button type="submit" (click)="save(vehicle.licensePlate, $event)" class="btn-conf">YES</button>
         </div>
       </div>
     </form>

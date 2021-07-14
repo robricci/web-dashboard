@@ -21,8 +21,8 @@
           <button type="button" class="btn-conf cancel" (click)="close()">CANCEL</button>
         </div>
         <div class="col-sm-6">
-          <button type="button" [disabled]="saveButtonDisabled"
-                  (click)="save(vehicle.licensePlate, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value)" class="btn-conf">SAVE</button>
+          <button type="submit" [disabled]="saveButtonDisabled"
+                  (click)="save(vehicle.licensePlate, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value, $event)" class="btn-conf">SAVE</button>
         </div>
       </div>
     </form>

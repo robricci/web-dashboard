@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   insertVehicleView: Subject<any> = new Subject();
 
   infoVehicle: VehicleDTO;
-  showLogoutButton: boolean = false;
+  showPrivateActions: boolean = false;
 
   stationsMarkers: Array<any> = [];
   vehiclesMarkers: Array<any> = [];
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   onLoggedIn(event: any): void {
     this.apiService.routes().subscribe(routes => {
-        this.showLogoutButton = true;
+        this.showPrivateActions = true;
         const stations = [];
         routes.forEach((route: RouteDTO) => {
           route.stations.forEach((sta: StationDTO) => {

@@ -30,7 +30,7 @@ export class ConfigurationComponent implements OnInit {
 
   @ViewChild('content') modal: ElementRef;
   private modalReference: NgbModalRef;
-  saveButtonDisabled: boolean = true;
+  saveButtonDisabled: boolean;
 
   constructor(private modalService: NgbModal,
               private apiService: ApiService) {}
@@ -42,6 +42,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   open(content) {
+    this.disableSaveButton();
     const ngbModalOptions: NgbModalOptions = {
       backdrop : 'static',
       keyboard : false,
@@ -55,11 +56,16 @@ export class ConfigurationComponent implements OnInit {
     this.saveButtonDisabled = false;
   }
 
+  disableSaveButton() {
+    this.saveButtonDisabled = true;
+  }
+
   close() {
     this.modalReference.close();
   }
 
-  save(licensePlate: string, occupancyTarget: number, inertialTimeTarget: number, waitingTimeTarget: number) {
+  save(licensePlate: string, occupancyTarget: number, inertialTimeTarget: number, waitingTimeTarget: number, event: Event) {
+    event.preventDefault();
     this.apiService.saveParamsConfiguration(licensePlate, occupancyTarget, inertialTimeTarget, waitingTimeTarget)
       .subscribe(res => {
           this.saved.emit();

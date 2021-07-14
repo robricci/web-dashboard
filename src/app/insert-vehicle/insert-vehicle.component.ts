@@ -40,7 +40,9 @@ export class InsertVehicleComponent implements OnInit {
     this.modalReference.close();
   }
 
-  save(licensePlate: string, totalSeats: number, occupancyTarget: number, inertialTimeTarget: number, waitingTimeTarget: number) {
+  save(licensePlate: string, totalSeats: number, occupancyTarget: number,
+       inertialTimeTarget: number, waitingTimeTarget: number, event: Event) {
+    event.preventDefault();
     const vehicles = [
       {
         licensePlate,

@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.modalReference = this.modalService.open(this.modal, ngbModalOptions);
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string, event: Event) {
+    event.preventDefault();
     this.apiService.login(username, password)
       .subscribe(response => {
           localStorage.setItem('loggedInUser', response.jwt);
