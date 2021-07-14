@@ -69,3 +69,7 @@
     <i class="fa fa-play label-arrow"></i>
   </div>
 </div>
+
+<div class="logout-box" *ngIf="showLogoutButton">
+  <button type="button" class="btn-conf cancel" (click)="logout()">Logout</button>
+</div>
