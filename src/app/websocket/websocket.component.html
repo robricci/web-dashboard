@@ -73,6 +73,7 @@
           <td colspan="3"> Confirmed Trips </td>
         </tr>
         <tr>
+          <th scope="col"> Approved </th>
           <th scope="col"> TripId </th>
           <th scope="col"> VehicleId </th>
           <th scope="col"> PickUpNodeId </th>
@@ -81,10 +82,13 @@
         <tbody>
         <tr *ngFor="let t of confirmedTrips">
           <td>
+            {{t.status}}
+          </td>
+          <td>
             {{t.tripId}}
           </td>
           <td>
-            {{t.vehicleId}}
+            {{t.vehicleLicensePlate}}
           </td>
           <td>
             {{t.pickUpNodeId}}

@@ -45,10 +45,14 @@ export class WebsocketComponent implements OnInit {
     this.backendService.connect(this.ticket)
       .subscribe(
         dataFromServer => {
-          if (dataFromServer !== undefined && dataFromServer.status) {
-            this.tripRequests[this.tripRequests.length - 1].status = dataFromServer.status;
-          } else if (dataFromServer !== undefined && dataFromServer.tripId) {
+          if (dataFromServer !== undefined && dataFromServer.tripId) { // Trip Confirmation
+            this.sendTripBtnDisabled = false;
             this.confirmedTrips.push(dataFromServer);
+          } else if (dataFromServer !== undefined && dataFromServer.status) { // Trip Request Confirmation
+            this.tripRequests[this.tripRequests.length - 1].status = dataFromServer.status;
+            if (dataFromServer.status === 'REJECTED') {
+              this.sendTripBtnDisabled = false;
+            }
           } else if (dataFromServer === -1) { // Error on connect
             this.reset();
           }
@@ -61,6 +65,7 @@ export class WebsocketComponent implements OnInit {
   }
 
   send(source: number, destination: number): void {
+    this.sendTripBtnDisabled = true;
     const tripReq = new TripRequest(source, destination);
     this.tripRequests.push(tripReq);
     this.backendService.send(tripReq);
