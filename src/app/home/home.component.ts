@@ -88,13 +88,9 @@ export class HomeComponent implements OnInit {
     stations.forEach(sta => {
       this.stationsMarkers.push({
         position: {
-          lat: sta.latitude,
-          lng: sta.longitude,
+          lat: sta.position.latitude,
+          lng: sta.position.longitude,
         },
-        /*label: {
-          color: 'red',
-          text: 'Marker label ' + (this.markers.length + 1),
-        },*/
         title: `Station ${sta.nodeId}`,
         options: {
           animation: google.maps.Animation.DROP,
