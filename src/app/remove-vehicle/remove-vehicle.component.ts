@@ -63,6 +63,8 @@ export class RemoveVehicleComponent implements OnInit {
             this.msg = 'Please try again later';
           } else if (response.status === 401) {
             this.msg = 'Invalid credentials';
+          } else if (response.status === 404) {
+            this.msg = `Vehicle ${licensePlate} not found`;
           } else {
             this.msg = 'Generic error';
           }
