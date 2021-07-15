@@ -36,9 +36,9 @@
       Inertial time target: {{ infoVehicle.inertialTimeTarget }} minutes<br>
       Waiting time target: {{ infoVehicle.waitingTimeTarget }} minutes
       <div class="actions">
-        <button class="btn" (click)="openManualDisplacementView()" title="Manual displacement"><i class="fa fa-arrows-alt"></i></button>
-        <button class="btn" (click)="openParamsConfigurationView()" title="Params configuration"><i class="fa fa-cogs"></i></button>
-        <button class="btn" (click)="openRemoveVehicleView()" title="Remove vehicle"><i class="fa fa-trash"></i></button>
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openManualDisplacementView()" title="Manual displacement"><fa-icon [icon]="faArrowsAlt"></fa-icon></button>
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openParamsConfigurationView()" title="Params configuration"><fa-icon [icon]="faCogs"></fa-icon></button>
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openRemoveVehicleView()" title="Remove vehicle"><fa-icon [icon]="faTrash"></fa-icon></button>
       </div>
     </div>
   </map-info-window>
@@ -60,12 +60,19 @@
   [openView]="insertVehicleView"
   (saved)="refreshVehicles()"></app-insert-vehicle>
 
+<app-manual-displacement
+  [openView]="manualDisplacementView"
+  [vehicle]="infoVehicle"
+  [routes]="routes"
+  (saved)="refreshVehicles()"></app-manual-displacement>
+
 <div class="add-vehicle" *ngIf="showPrivateActions">
   <a href="#" class="float" (click)="openInsertVehicleView()">
-    <i class="fa fa-plus add"></i>
+    <p class="placeholder"></p>
+    <fa-icon class="add" [icon]="faPlus"></fa-icon>
   </a>
   <div class="label-container">
-    <i class="fa fa-play fa-rotate-180 label-arrow"></i>
+    <fa-icon class="label-arrow" [icon]="faPlay" [rotate]="180"></fa-icon>
     <div class="label-text">Insert Vehicle</div>
   </div>
 </div>

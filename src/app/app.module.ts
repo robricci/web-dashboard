@@ -12,6 +12,8 @@ import {AuthInterceptor} from './auth.interceptor';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { RemoveVehicleComponent } from './remove-vehicle/remove-vehicle.component';
 import { InsertVehicleComponent } from './insert-vehicle/insert-vehicle.component';
+import { ManualDisplacementComponent } from './manual-displacement/manual-displacement.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,17 @@ import { InsertVehicleComponent } from './insert-vehicle/insert-vehicle.componen
     LoginComponent,
     ConfigurationComponent,
     RemoveVehicleComponent,
-    InsertVehicleComponent
+    InsertVehicleComponent,
+    ManualDisplacementComponent,
+    ManualDisplacementComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     GoogleMapsModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

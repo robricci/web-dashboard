@@ -22,11 +22,13 @@
       font-size: 16px;
       cursor: pointer;
       margin-right: 10px;
-    }
-
-    /* Darker background on mouse-over */
-    .btn:hover {
-      background-color: #1976d2;
+      &:hover {
+        background-color: #1976d2;
+      }
+      &:disabled {
+        background-color: #888888;
+        cursor: not-allowed;
+      }
     }
   }
 }
@@ -68,10 +70,12 @@
     text-align:center;
     box-shadow: 2px 2px 3px #999;
   }
-
+  .placeholder {
+    margin: 10px 0 0 0;
+  }
   .add {
+
     font-size:24px;
-    margin-top:18px;
   }
 
   a.float + div.label-container {

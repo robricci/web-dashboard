@@ -55,8 +55,8 @@ export class ApiService {
     return this.http.delete<any>(endpoint);
   }
 
-  manualDisplacement(licensePlate: string): Observable<any> {
+  manualDisplacement(licensePlate: string, body: any): Observable<any> {
     const endpoint = ApiService.MANUAL_DISPLACEMENT_API_ENDPOINT.replace('{}', licensePlate);
-    return this.http.post<any>(endpoint, {});
+    return this.http.post<any>(endpoint, body);
   }
 }

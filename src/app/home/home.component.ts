@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {MapInfoWindow, MapMarker} from '@angular/google-maps';
+import { faPlus, faPlay, faArrowsAlt, faCogs, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {ApiService} from '../services/api.service';
 import {RouteDTO} from '../dto/RouteDTO';
 import {StationDTO} from '../dto/StationDTO';
-import {MapInfoWindow, MapMarker} from '@angular/google-maps';
+
 import {VehicleDTO} from '../dto/VehicleDTO';
 import {Subject} from 'rxjs';
 
@@ -15,6 +17,12 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
+  faPlus = faPlus;
+  faPlay = faPlay;
+  faCogs = faCogs;
+  faArrowsAlt = faArrowsAlt;
+  faTrash = faTrash;
+
   mapOptions = {
     zoom: 11,
     center: {
@@ -26,7 +34,7 @@ export class HomeComponent implements OnInit {
     scaleControl: false,
     streetViewControl: false,
     rotateControl: false,
-    fullscreenControl: true
+    fullscreenControl: false
   };
 
   paramsConfigurationView: Subject<any> = new Subject();
@@ -35,6 +43,7 @@ export class HomeComponent implements OnInit {
   insertVehicleView: Subject<any> = new Subject();
 
   infoVehicle: VehicleDTO;
+  routes: Array<RouteDTO>;
   showPrivateActions: boolean = false;
 
   stationsMarkers: Array<any> = [];
@@ -58,6 +67,7 @@ export class HomeComponent implements OnInit {
     this.apiService.routes().subscribe(routes => {
         this.showPrivateActions = true;
         const stations = [];
+        this.routes = routes;
         routes.forEach((route: RouteDTO) => {
           route.stations.forEach((sta: StationDTO) => {
             if (!stations.find(item => item.nodeId === sta.nodeId)) {

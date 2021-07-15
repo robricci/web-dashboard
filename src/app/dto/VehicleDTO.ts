@@ -1,3 +1,5 @@
+import {StationDTO} from './StationDTO';
+
 export class VehicleDTO {
   id: string;
   licensePlate: string;
@@ -10,7 +12,8 @@ export class VehicleDTO {
 
   moving: boolean;
   initialWaitingDate: any;
-  currentStation: any;
+  currentStation: StationDTO;
+  routeId: string;
   route: Array<any>;
   pickPoint: Array<any>;
 }
