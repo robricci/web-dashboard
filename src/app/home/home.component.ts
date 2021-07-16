@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MapInfoWindow, MapMarker} from '@angular/google-maps';
-import { faPlus, faPlay, faArrowsAlt, faCogs, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faPlay, faArrowsAlt, faCogs, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {ApiService} from '../services/api.service';
 import {RouteDTO} from '../dto/RouteDTO';
 import {StationDTO} from '../dto/StationDTO';
@@ -34,7 +34,17 @@ export class HomeComponent implements OnInit {
     scaleControl: false,
     streetViewControl: false,
     rotateControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    styles: [
+      {
+        featureType: 'poi',
+        stylers: [{ visibility: 'off' }]
+      },
+      {
+        featureType: 'transit',
+        stylers: [{ visibility: 'off' }]
+      }
+    ]
   };
 
   paramsConfigurationView: Subject<any> = new Subject();
@@ -103,10 +113,10 @@ export class HomeComponent implements OnInit {
         },
         title: `Station ${sta.nodeId}`,
         options: {
+          cursor: 'default',
           animation: google.maps.Animation.DROP,
           icon: '/assets/icons/station.png'
-        },
-        info: 'Ehiiiii'
+        }
       });
     });
   }
