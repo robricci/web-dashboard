@@ -50,21 +50,17 @@ export class RemoveVehicleComponent implements OnInit {
     event.preventDefault();
     this.apiService.removeVehicle(licensePlate)
       .subscribe(res => {
-          if (res) {
-            this.saved.emit();
-            this.close();
-          } else {
-            this.enableSaveButton = false;
-            this.msg = 'The vehicle is currently in motion, please try again when the vehicle is stationary.';
-          }
+          this.saved.emit();
+          this.close();
         },
         response => {
+          this.enableSaveButton = false;
           if (response.status === 400) {
             this.msg = 'Please try again later';
           } else if (response.status === 401) {
             this.msg = 'Invalid credentials';
           } else if (response.status === 404) {
-            this.msg = `Vehicle ${licensePlate} not found`;
+            this.msg = `Vehicle ${licensePlate} not found or is in movement`;
           } else {
             this.msg = 'Generic error';
           }
