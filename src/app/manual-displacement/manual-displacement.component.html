@@ -1,0 +1,38 @@
+<ng-template #content let-modal>
+  <div class="modal-body" *ngIf="vehicle">
+    <h5 class="modal-title text-center">Manual displacement</h5>
+    <p class="text-center">Vehicle {{vehicle.licensePlate}}</p>
+
+    <form class="insert-vehicle-form">
+      <div class="row">
+        <div class="form-group col-md-6 col-sm-12">
+          <select class="form-control" id="route" #route (change)="changeStationsOption(route.value)">
+            <option *ngFor="let r of routes; let i = index" [value]="r.id" [selected]="r.id == vehicle.routeId">Route #{{i+1}}</option>
+          </select>
+          <label class="form-control-placeholder" for="route">Route<span class="required">*</span></label>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <select class="form-control" id="station" #station>
+            <option *ngFor="let s of stations" [value]="s.nodeId" [selected]="s.nodeId == vehicle.currentStation.nodeId">Station {{s.nodeId}}</option>
+          </select>
+          <label class="form-control-placeholder" for="station">Station<span class="required">*</span></label>
+        </div>
+      </div>
+      <div class="row button-box">
+        <div class="col-md-6 col-sm-12">
+          <button type="button" class="btn-conf cancel" (click)="close()">CANCEL</button>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <button type="submit" [disabled]="!enableSaveButton"
+                  (click)="save(vehicle.licensePlate, route.value, station.value, $event)" class="btn-conf">SAVE</button>
+        </div>
+        <div class="col-md-6 col-sm-12 required-box required">
+          *Required field
+        </div>
+        <div class="col-md-6 col-sm-12 loading" *ngIf="!enableSaveButton">
+          <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>Vehicle displacement...
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

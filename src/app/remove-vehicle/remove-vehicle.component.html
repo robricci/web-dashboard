@@ -1,0 +1,21 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">Remove Vehicle</h5>
+    <p>Are you sure you want to remove the vehicle with license plate  <b>{{vehicle.licensePlate}}</b>?</p>
+    <form class="remove-vehicle-form">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <button type="button" class="btn-conf cancel" (click)="close()">NO</button>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <button type="submit" (click)="save(vehicle.licensePlate, $event)" class="btn-conf" [disabled]="!enableSaveButton">YES</button>
+        </div>
+        <div class="col-sm-12">
+          <div class="msg" [ngClass]="msg !== undefined ? 'show' : ''">
+            {{msg}} <span class="btn-ok" (click)="close()">Ok!</span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

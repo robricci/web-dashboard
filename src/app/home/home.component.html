@@ -1,0 +1,82 @@
+<google-map
+  [options]="mapOptions"
+  height="100vh"
+  width="100%">
+
+  <map-marker
+    *ngFor="let marker of stationsMarkers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options">
+  </map-marker>
+
+  <map-marker
+    #markerElem="mapMarker"
+    *ngFor="let marker of vehiclesMarkers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"
+    (mapClick)="openInfo(markerElem, marker.info)">
+  </map-marker>
+
+  <map-info-window>
+    <div *ngIf="infoVehicle" class="vehicle-info">
+      <div *ngIf="infoVehicle.moving" class="moving">
+        <img src="assets/icons/road.png" alt="moving"/>
+      </div>
+      <h6>Vehicle {{ infoVehicle.licensePlate }}</h6>
+      Total seats: {{ infoVehicle.totalAvailableSeats }}<br>
+      Occupied seats: {{ infoVehicle.occupiedSeats }}<br>
+      Waiting time {{ infoVehicle.initialWaitingDate | date: 'dd-MM-yyyy HH:mm' }}<br>
+      <br>
+      <b class="sub-title">Parameters</b><br>
+      Occupancy target: {{ infoVehicle.occupancyTarget }} seats<br>
+      Inertial time target: {{ infoVehicle.inertialTimeTarget }} minutes<br>
+      Waiting time target: {{ infoVehicle.waitingTimeTarget }} minutes
+      <div class="actions">
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openManualDisplacementView()" title="Manual displacement"><fa-icon [icon]="faArrowsAlt"></fa-icon></button>
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openParamsConfigurationView()" title="Params configuration"><fa-icon [icon]="faCogs"></fa-icon></button>
+        <button [disabled]="infoVehicle.moving" class="btn" (click)="openRemoveVehicleView()" title="Remove vehicle"><fa-icon [icon]="faTrash"></fa-icon></button>
+      </div>
+    </div>
+  </map-info-window>
+</google-map>
+
+<app-login (loggedIn)="onLoggedIn($event)"></app-login>
+
+<app-configuration
+  [openView]="paramsConfigurationView"
+  [vehicle]="infoVehicle"
+  (saved)="refreshVehicles()"></app-configuration>
+
+<app-remove-vehicle
+  [openView]="removeVehicleView"
+  [vehicle]="infoVehicle"
+  (saved)="refreshVehicles()"></app-remove-vehicle>
+
+<app-insert-vehicle
+  [openView]="insertVehicleView"
+  (saved)="refreshVehicles()"></app-insert-vehicle>
+
+<app-manual-displacement
+  [openView]="manualDisplacementView"
+  [vehicle]="infoVehicle"
+  [routes]="routes"
+  (saved)="refreshVehicles()"></app-manual-displacement>
+
+<div class="add-vehicle" *ngIf="showPrivateActions">
+  <a href="#" class="float" (click)="openInsertVehicleView()">
+    <p class="placeholder"></p>
+    <fa-icon class="add" [icon]="faPlus"></fa-icon>
+  </a>
+  <div class="label-container">
+    <fa-icon class="label-arrow" [icon]="faPlay" [rotate]="180"></fa-icon>
+    <div class="label-text">Insert Vehicle</div>
+  </div>
+</div>
+
+<div class="logout-box" *ngIf="showPrivateActions">
+  <button type="button" class="btn-conf cancel" (click)="logout()">Logout</button>
+</div>

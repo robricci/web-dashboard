@@ -1,0 +1,42 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <h5 class="modal-title text-center">Insert Vehicle</h5>
+
+    <form class="insert-vehicle-form">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <input #licensePlate type="text" class="form-control" id="licensePlate" required autocomplete="off">
+          <label class="form-control-placeholder" for="licensePlate">License Plate<span class="required">*</span></label>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <input #totalSeats type="number" min="1" class="form-control" id="totalSeats" required autocomplete="off">
+          <label class="form-control-placeholder" for="totalSeats">Total seats<span class="required">*</span></label>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <input #occupancyTarget min="1" type="number" class="form-control" id="occupancyTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="occupancyTarget">Occupancy target (# seats)<span class="required">*</span></label>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <input #inertialTimeTarget min="1" type="number" class="form-control" id="inertialTimeTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="inertialTimeTarget">Inertial time target (minutes)<span class="required">*</span></label>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <input #waitingTimeTarget min="1" type="number" class="form-control" id="waitingTimeTarget" required autocomplete="off">
+          <label class="form-control-placeholder" for="waitingTimeTarget">Waiting time target (minutes)<span class="required">*</span></label>
+        </div>
+      </div>
+      <div class="row button-box">
+        <div class="col-md-6 col-sm-12">
+          <button type="button" class="btn-conf cancel" (click)="close()">CANCEL</button>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <button type="submit"
+                  (click)="save(licensePlate.value, totalSeats.value, occupancyTarget.value, inertialTimeTarget.value, waitingTimeTarget.value, $event)" class="btn-conf">SAVE</button>
+        </div>
+        <div class="col-md-6 col-sm-12 required-box required">
+          *Required field
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
