@@ -4,21 +4,21 @@ import {Observable} from 'rxjs';
 import {RouteDTO} from '../dto/RouteDTO';
 import {VehicleDTO} from '../dto/VehicleDTO';
 import {SessionResponse} from '../dto/SessionResponse';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private static BASE_ENDPOINT = 'http://localhost:8080/api/city';
-  private static LOGIN_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/users/login';
-  private static VALIDATE_SESSION_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/users/validate-session';
-  private static GET_ROUTES_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/routes';
-  private static GET_VEHICLES_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles';
-  private static INSERT_VEHICLES_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles';
-  private static VEHICLE_PARAMS_CONFIGURATION_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles/{}/configuration';
-  private static REMOVE_VEHICLE_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles/{}';
-  private static MANUAL_DISPLACEMENT_API_ENDPOINT = ApiService.BASE_ENDPOINT + '/vehicles/{}/displacement';
+  private static LOGIN_API_ENDPOINT = environment.baseEndpoint + '/users/login';
+  private static VALIDATE_SESSION_API_ENDPOINT = environment.baseEndpoint + '/users/validate-session';
+  private static GET_ROUTES_API_ENDPOINT = environment.baseEndpoint + '/routes';
+  private static GET_VEHICLES_API_ENDPOINT = environment.baseEndpoint + '/vehicles';
+  private static INSERT_VEHICLES_API_ENDPOINT = environment.baseEndpoint + '/vehicles';
+  private static VEHICLE_PARAMS_CONFIGURATION_API_ENDPOINT = environment.baseEndpoint + '/vehicles/{}/configuration';
+  private static REMOVE_VEHICLE_API_ENDPOINT = environment.baseEndpoint + '/vehicles/{}';
+  private static MANUAL_DISPLACEMENT_API_ENDPOINT = environment.baseEndpoint + '/vehicles/{}/displacement';
 
   constructor(private http: HttpClient) { }
 
