@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseEndpoint: 'http://apigateway-challenge2.router.default.svc.cluster.local/api/city'
+  baseEndpoint: 'http://localhost:8080/api/city'
 };
 
 /*
