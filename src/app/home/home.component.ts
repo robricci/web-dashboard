@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
         title: `Vehicle ${vehicle.licensePlate}`,
         options: {
           animation: vehicle.moving ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP,
-          icon: '/assets/icons/car.png'
+          icon: '/assets/icons/minibus.png'
         },
         info: vehicle
       });
