@@ -1,4 +1,4 @@
-# CarTripServices
+# CarTripServices  [![Build Status](https://app.travis-ci.com/robricci/web-dashboard.svg?branch=master)](https://app.travis-ci.com/robricci/web-dashboard)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
 
