@@ -4,9 +4,9 @@ node_js: 10.9.0
 dist: trusty
 sudo: required
 
-before_script: npm install -g @angular/cli
+before_script: npm install
 
-script: ng build
+script: npm run-script build
 
 notifications:
   on_success: always
