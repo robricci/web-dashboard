@@ -1,0 +1,14 @@
+language: node_js
+os: linux
+node_js: 10.9.0
+dist: trusty
+sudo: required
+
+before_script: npm install -g @angular/cli
+
+script: ng build
+
+notifications:
+  on_success: always
+  on_failure: always
+       
